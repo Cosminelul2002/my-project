@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Appointment;
 use App\Http\Requests\StoreAppointmentRequest;
 use App\Http\Requests\UpdateAppointmentRequest;
+use Carbon\Carbon;
 
 class AppointmentController extends Controller
 {
@@ -29,7 +30,29 @@ class AppointmentController extends Controller
      */
     public function store(StoreAppointmentRequest $request)
     {
-        //
+        $request->validated();
+
+        // verify if there are 30 minutes apart from the others
+        $appointments = Appointment::all();
+
+        foreach ($appointments as $appointment) {
+            if (Carbon::parse($appointment->start_date)->diffInMinutes($request->start_date) < 30) {
+                return response()->json([
+                    'message' => 'There are less than 30 minutes apart from the others',
+                ], 422);
+            }
+        }
+
+        Appointment::create([
+            'start_date' => Carbon::parse($request->start_date),
+            'end_date' => Carbon::parse($request->start_date)->addHour(),
+            'status' => 'pending',
+            'description' => $request->description,
+        ]);
+
+        return response()->json([
+            'message' => 'Appointment created successfully',
+        ], 201);
     }
 
     /**
