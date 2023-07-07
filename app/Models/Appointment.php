@@ -20,4 +20,14 @@ class Appointment extends Model
 		'created_at' => 'datetime',
 		'updated_at' => 'datetime',
 	];
+
+    public function program()
+    {
+        return $this->hasMany(Program::class);
+    }
+
+    public function consultant()
+    {
+        return $this->belongsTo(Consultant::class);
+    }
 }

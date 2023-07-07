@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\LandingController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,5 +18,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [LandingController::class, 'index'])->name('landing');
-Route::post('/', [AppointmentController::class, 'store'])->name('appointment.store');
+
+Route::get('/', [LoginController::class, 'show'])->name('login');
+Route::post('/', [LoginController::class, 'login'])->name('login');
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::name("user.")->prefix('/user')->group(function () {
+	Route::get('/{id}/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
+});
+Route::name("admin.")->prefix('/admin')->group(function () {
+	Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');
+});
+Route::post('/appointment', [AppointmentController::class, 'store'])->name('appointment.store');

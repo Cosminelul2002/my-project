@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "aa322c53454393ed775cfe4807d54a50",
+    "content-hash": "6323ed1d6261aa246f320b7179c65dd1",
     "packages": [
         {
             "name": "brick/math",
@@ -60,6 +60,63 @@
                 }
             ],
             "time": "2023-01-15T23:15:59+00:00"
+        },
+        {
+            "name": "codestage/laravel-authorization",
+            "version": "v0.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Codestagero/laravel-authorization.git",
+                "reference": "bd7f35c3ce1c5358719169c34f48e95449fa0a6d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Codestagero/laravel-authorization/zipball/bd7f35c3ce1c5358719169c34f48e95449fa0a6d",
+                "reference": "bd7f35c3ce1c5358719169c34f48e95449fa0a6d",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/auth": "^10",
+                "illuminate/console": "^10",
+                "illuminate/contracts": "^10",
+                "illuminate/database": "^10",
+                "illuminate/http": "^10",
+                "illuminate/support": "^10"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3",
+                "mockery/mockery": "^1.5",
+                "orchestra/testbench": "^8",
+                "phpunit/phpunit": "^10"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "\\Codestage\\Authorization\\Providers\\AuthorizationServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Codestage\\Authorization\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marin Călin",
+                    "email": "marincalin2551@hotmail.com"
+                }
+            ],
+            "support": {
+                "issues": "https://github.com/Codestagero/laravel-authorization/issues",
+                "source": "https://github.com/Codestagero/laravel-authorization/tree/v0.2.0"
+            },
+            "time": "2023-06-01T19:13:34+00:00"
         },
         {
             "name": "dflydev/dot-access-data",

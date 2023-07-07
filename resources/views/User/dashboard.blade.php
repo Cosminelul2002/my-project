@@ -17,16 +17,7 @@
     @vite('resources/css/app.css')
 </head>
 
-@php
-    $days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
-@endphp
-
 <body class="bg-gray-100 flex flex-col items-center justify-center">
-    <div class="m-10">
-        <button id="open_modal" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            Admin
-        </button>
-    </div>
     <div class="container mx-auto py-8">
         <div class="flex flex-col gap-10">
             @foreach ($appointments as $date => $groupedAppointments)
@@ -47,7 +38,7 @@
             @endforeach
         </div>
     </div>
-    <form method="POST" id="appointment_form" class=" border p-10 w-[500px]">
+    <form method="POST" id="appointment_form" class="m-10 border p-10 w-[500px]">
         <h1 class="text-2xl font-bold mb-5">Book an appointment</h1>
         <div class="relative z-0 w-full mb-6 group">
             <input type="text" name="floating_description" id="floating_description"
@@ -80,6 +71,13 @@
         <button type="submit" id="submit-button"
             class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
     </form>
+    <div class="flex flex-row items-center gap-10 p-5">
+        <form method="GET" action="{{ route('logout') }}">
+            @csrf
+            <button type="submit"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Logout</button>
+        </form>
+    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -129,7 +127,8 @@
                         _token: "{{ csrf_token() }}",
                         description: description,
                         start_date: date,
-                        hour: hour
+                        hour: hour,
+                        user_id: {{ auth()->user()->id }}
                     },
                     success: function(response) {
                         let message = JSON.parse(response.responseText);
